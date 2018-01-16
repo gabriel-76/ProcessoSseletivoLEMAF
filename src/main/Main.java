@@ -21,7 +21,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String input = "Normal:4:16Mar2009(seg)17Mar2009(ter)18Mar2009(qua)";
+        String input = "Normal:2:16Mar2009(seg)17Mar2009(ter)18Mar2009(qua)";
 
         String[] data = input.split(":");
         
@@ -44,7 +44,7 @@ public class Main {
         CarRental carRental = new CarRental();
         carRental.addCar(new Car("Ferrari", 2, CarType.SPORTING));
         carRental.addCar(new Car("SW4", 6, CarType.SUV));
-        carRental.addCar(new Car("Palio", 3, CarType.COMPACT));
+        carRental.addCar(new Car("Palio", 4, CarType.COMPACT));
 
         
         System.out.println(carRental.toAllocate(data[0], Integer.parseInt(data[1]), dayTypes));

@@ -18,9 +18,6 @@ public class NorthCar extends AbstractCarStore{
     @Override
     public String toString() {
         return "NorthCar";
-    }
-    
-    
-    
+    }     
     
 }

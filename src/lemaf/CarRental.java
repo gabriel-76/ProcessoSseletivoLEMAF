@@ -5,8 +5,11 @@
  */
 package lemaf;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map.Entry;
 
 /**
  *
@@ -51,6 +54,9 @@ public class CarRental {
         float price = Float.MAX_VALUE;
         int i = 0;
         int invalid = 0;
+
+        ArrayList<Entry<Integer, Float>> entrys = new ArrayList<>();
+
         for (AbstractCarStore cs : stores) {
             if (cs.getCapacity() >= qtd) {
                 float currentPrice = 0f;
@@ -69,20 +75,42 @@ public class CarRental {
                         }
                     }
                 }
-//                System.out.println(price + " => " + currentPrice);
+
+                entrys.add(new SimpleEntry<>(i, currentPrice));
+//                System.out.println("cur =>" + currentPrice);
                 if (currentPrice < price) {
                     price = currentPrice;
                     storePosition = i;
                 }
-            }else{
+            } else {
                 invalid++;
             }
             i++;
         }
 
-        AbstractCarStore store = stores.get(storePosition);
-        Car car = store.allocateCar(qtd);
-        if(invalid == stores.size() || car == null){
+//        System.out.println(entrys.toString());
+
+        if (entrys.isEmpty()) {
+            return "none:NONE";
+        }
+
+        Collections.sort(entrys, (Entry<Integer, Float> t, Entry<Integer, Float> t1) -> t.getValue().compareTo(t1.getValue()));
+
+//        System.out.println(entrys.toString());
+//        System.out.println();
+
+        AbstractCarStore store = null;
+        Car car = null;
+
+        for (Entry<Integer, Float> en : entrys) {
+            store = stores.get(en.getKey());
+            car = store.allocateCar(qtd);
+            if(car != null){
+                break;
+            }
+        }
+
+        if (invalid == stores.size() || car == null) {
             return "none:NONE";
         }
 

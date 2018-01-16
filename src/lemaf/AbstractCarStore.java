@@ -88,6 +88,7 @@ abstract class AbstractCarStore {
     }
     
     public Car allocateCar(Integer capacity){
+        ordenate();
         for(Car c : cars){
             if(c.getCapacity() >= capacity){
                 return c;
@@ -96,7 +97,7 @@ abstract class AbstractCarStore {
         return null;
     }
 
-    private void ordenate(){
+    public void ordenate(){
         Collections.sort(cars, new CarCompare());
     }
 }
