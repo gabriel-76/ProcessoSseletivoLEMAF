@@ -7,4 +7,5 @@ Navegua até a pasta src do projeto.
 Então execute os comandos.
 
 $ javac **/*.java
+
 $ java main.Main ../entrada.txt
